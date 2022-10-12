@@ -1,0 +1,214 @@
+<HTML>
+<HEAD>
+<TITLE>Map Builder</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+objnum=0;
+var obj=new Array(5);
+obj[0]=new Array(51);
+obj[1]=new Array(51);
+obj[2]=new Array(51);
+obj[3]=new Array(51);
+obj[4]=new Array(51);
+for(x=1;x<52;x++) {obj[0][x]=0;}
+function changebg(n) {
+	bg=parent.frmMain.document.getElementById("mapBG");
+	bg.src="background_"+n+".jpg";
+//parent.frmMain.document.images['mapBG'].src='background_'+Background.value+'.jpg';
+}
+
+function addobject(n,nm) {
+	for(objnum=1;obj[0][objnum]!=0 && objnum<51;objnum++) {}
+	if(objnum==51) {
+		alert("Maximum object number exceeded. Can't add object.");
+		return false;
+	}
+	obj[0][objnum]=n;
+	obj[1][objnum]=0;
+	obj[2][objnum]=0;
+	obj[3][objnum]=nm;
+	obj[4][objnum]=50;
+	imagename="mapImg"+objnum;
+	objj=parent.frmMain.document.getElementById("mapObj"+objnum);
+	if(n==1) worldtype="Construction Yard";
+	if(n==2) worldtype="Diplomatic Station";
+	if(n==3) worldtype="Military Installation";
+	if(n==4) worldtype="Scrap Yard";
+	if(n==5) worldtype="Space Docks";
+	if(n==6) worldtype="Trade Station";
+	if(n==7) worldtype="Asteroid Belt";
+	if(n==8) worldtype="Planetary Ring";
+	if(n==9) worldtype="Rich Dustcloud";
+	if(n==10) worldtype="Ship Graveyard";
+	if(n==11) worldtype="Gas Giant: Medium-Yield";
+	if(n==12) worldtype="Gas Giant: Low-Yield";
+	if(n==13) worldtype="Gas Giant: High-Yield";
+	if(n==14) worldtype="Hidden Outpost";
+	if(n==15) worldtype="Leisure World";
+	if(n==16) worldtype="Primitive World";
+	if(n==17) worldtype="Industrial World";
+	if(n==18) worldtype="Agrarian World";
+	if(n==19) worldtype="Commerce World";
+	if(n==20) worldtype="Barren World";
+	if(n==21) worldtype="Ice World";
+	if(n==22) worldtype="Molten World";
+	if(n==23) worldtype="Toxic World";
+	if(n==24) worldtype="Temperate Planet";
+	if(n==25) worldtype="Verdant Planet";
+	if(n==26) worldtype="Water Planet";
+	if(n==27) worldtype="Jump Gate";
+	if(n==28) worldtype="Ancient Jump Gate";
+	if(n==29) worldtype="Faulty Jump Gate";
+	if(n==30) worldtype="Mining Outpost";
+	if(n==31) worldtype="Observation Outpost";
+	if(n==32) worldtype="Religious Outpost";
+	if(n==33) worldtype="Scientific Outpost";
+	if(n==34) worldtype="Ice-Rock Comet";
+	if(n==35) worldtype="Mineral-Rich Comet";
+	objj.innerHTML="<IMG SRC='object_"+n+".gif' NAME='"+imagename+"'><BR>"+nm+"<BR><SPAN CLASS='planettype'>("+worldtype+")</SPAN>";
+	objj.style.left=0;
+	objj.style.top=0;
+	parent.frmMain.document.images[imagename].width=50;
+}
+function generate() {
+	bg=parent.frmMain.document.images["mapBG"].src;
+	bg=bg.substring(bg.indexOf("background"),200);
+	for(x=1;x<51;x++) {
+		if(obj[0][x]>0)
+			eval("frm.obj"+x).value=obj[0][x]+"|"+obj[1][x]+"|"+obj[2][x]+"|"+obj[4][x]+"|"+obj[3][x];
+		else
+			eval("frm.obj"+x).value="";
+	}
+	frm.background.value=bg;
+}
+</SCRIPT>
+<STYLE TYPE="text/css">
+TD	{font-family:Arial; font-size:10pt;}
+</STYLE>
+</HEAD>
+<BODY BGCOLOR=white TEXT=black>
+<CENTER>
+
+<BR><TABLE CELLSPACING=0 CELLPADDING=0 BORDER=0><TR><TD BGCOLOR="#ffff80" WIDTH=220 ALIGN=center><FONT SIZE=+1>Campaign Map Builder</TD></TR></TABLE>
+<BR>
+<TABLE CELLSPACING=0 CELLPADDING=0 BORDER=0 BGCOLOR="#d0ffd0" WIDTH=160>
+<TR ALIGN=center><TD><B><U>Background</U></B></TD></TR><FORM NAME="frmBG">
+<TR ALIGN=center><TD><SELECT NAME="Background">
+<OPTION VALUE=1>Multicolour
+<OPTION VALUE=2>Multicolour+Belt
+<OPTION VALUE=3>Brown
+<OPTION VALUE=4>Brown+Belt
+<OPTION VALUE=5>Blue
+<OPTION VALUE=6>Blue+Belt
+<OPTION VALUE=7>Grey
+<OPTION VALUE=8>Grey+Belt
+<OPTION VALUE=9>Purple
+<OPTION VALUE=10>Purple+Belt
+</SELECT></TD></TR>
+<TR ALIGN=center><TD><INPUT TYPE=button onClick="changebg(frmBG.Background.value);" VALUE="Change"></TD></TR>
+</FORM></TABLE><BR>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 BORDER=0 BGCOLOR="#d0d0ff" WIDTH=270><FORM NAME="frmadd">
+<TR ALIGN=center><TD><B><U>Add object</U></B></TD></TR>
+<TR ALIGN=center><TD><SELECT NAME="ObjectToAdd">
+<OPTION VALUE=1>Space Installation: Construction Yard
+<OPTION VALUE=2>Space Installation: Diplomatic Station
+<OPTION VALUE=3>Space Installation: Military Installation
+<OPTION VALUE=4>Space Installation: Scrap Yard
+<OPTION VALUE=5>Space Installation: Space Docks
+<OPTION VALUE=6>Space Installation: Trade Station
+<OPTION VALUE=7>Space Debris: Asteroid Belt
+<OPTION VALUE=8>Space Debris: Planetary Ring
+<OPTION VALUE=9>Space Debris: Rich Dustcloud
+<OPTION VALUE=10>Space Debris: Ship Graveyard
+<OPTION VALUE=11>Gas Giant: Medium-Yield
+<OPTION VALUE=12>Gas Giant: Low-Yield
+<OPTION VALUE=13>Gas Giant: High-Yield
+<OPTION VALUE=14>Gas Giant: Hidden Outpost
+<OPTION VALUE=15>Settled World: Leisure World
+<OPTION VALUE=16>Settled World: Primitive World
+<OPTION VALUE=17>Settled World: Industrial World
+<OPTION VALUE=18>Settled World: Agrarian World
+<OPTION VALUE=19>Settled World: Commerce World
+<OPTION VALUE=20>Dead World: Barren World
+<OPTION VALUE=21>Dead World: Ice World
+<OPTION VALUE=22>Dead World: Molten World
+<OPTION VALUE=23>Dead World: Toxic World
+<OPTION VALUE=24>Uninhabited World: Temperate Planet
+<OPTION VALUE=25>Uninhabited World: Verdant Planet
+<OPTION VALUE=26>Uninhabited World: Water World
+<OPTION VALUE=27>Jump Gate: Standard
+<OPTION VALUE=28>Jump Gate: Ancient
+<OPTION VALUE=29>Jump Gate: Faulty
+<OPTION VALUE=30>Outpost: Mining Outpost
+<OPTION VALUE=31>Outpost: Observation Outpost
+<OPTION VALUE=32>Outpost: Religious Outpost
+<OPTION VALUE=33>Outpost: Scientific Outpost
+<OPTION VALUE=34>Comet: Ice-Rock Composite
+<OPTION VALUE=35>Comet: Mineral-Rich
+</SELECT></TD></TR>
+<TR ALIGN=center><TD>Name: <INPUT TYPE=text NAME="ObjectName" SIZE=10></TD></TR>
+<TR ALIGN=center><TD><INPUT TYPE=button onClick="addobject(ObjectToAdd.value,ObjectName.value);" VALUE="Add object"></TD></TR>
+</FORM></TABLE><BR>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 BORDER=0 WIDTH=200 BGCOLOR="#ffd0d0"><TR ALIGN=center><TD>
+<FORM ACTION="generate.aspx" NAME="frm" METHOD=post><BR>
+<INPUT TYPE=hidden NAME="background">
+<INPUT TYPE=hidden NAME="obj1">
+<INPUT TYPE=hidden NAME="obj2">
+<INPUT TYPE=hidden NAME="obj3">
+<INPUT TYPE=hidden NAME="obj4">
+<INPUT TYPE=hidden NAME="obj5">
+<INPUT TYPE=hidden NAME="obj6">
+<INPUT TYPE=hidden NAME="obj7">
+<INPUT TYPE=hidden NAME="obj8">
+<INPUT TYPE=hidden NAME="obj9">
+<INPUT TYPE=hidden NAME="obj10">
+<INPUT TYPE=hidden NAME="obj11">
+<INPUT TYPE=hidden NAME="obj12">
+<INPUT TYPE=hidden NAME="obj13">
+<INPUT TYPE=hidden NAME="obj14">
+<INPUT TYPE=hidden NAME="obj15">
+<INPUT TYPE=hidden NAME="obj16">
+<INPUT TYPE=hidden NAME="obj17">
+<INPUT TYPE=hidden NAME="obj18">
+<INPUT TYPE=hidden NAME="obj19">
+<INPUT TYPE=hidden NAME="obj20">
+<INPUT TYPE=hidden NAME="obj21">
+<INPUT TYPE=hidden NAME="obj22">
+<INPUT TYPE=hidden NAME="obj23">
+<INPUT TYPE=hidden NAME="obj24">
+<INPUT TYPE=hidden NAME="obj25">
+<INPUT TYPE=hidden NAME="obj26">
+<INPUT TYPE=hidden NAME="obj27">
+<INPUT TYPE=hidden NAME="obj28">
+<INPUT TYPE=hidden NAME="obj29">
+<INPUT TYPE=hidden NAME="obj30">
+<INPUT TYPE=hidden NAME="obj31">
+<INPUT TYPE=hidden NAME="obj32">
+<INPUT TYPE=hidden NAME="obj33">
+<INPUT TYPE=hidden NAME="obj34">
+<INPUT TYPE=hidden NAME="obj35">
+<INPUT TYPE=hidden NAME="obj36">
+<INPUT TYPE=hidden NAME="obj37">
+<INPUT TYPE=hidden NAME="obj38">
+<INPUT TYPE=hidden NAME="obj39">
+<INPUT TYPE=hidden NAME="obj40">
+<INPUT TYPE=hidden NAME="obj41">
+<INPUT TYPE=hidden NAME="obj42">
+<INPUT TYPE=hidden NAME="obj43">
+<INPUT TYPE=hidden NAME="obj44">
+<INPUT TYPE=hidden NAME="obj45">
+<INPUT TYPE=hidden NAME="obj46">
+<INPUT TYPE=hidden NAME="obj47">
+<INPUT TYPE=hidden NAME="obj48">
+<INPUT TYPE=hidden NAME="obj49">
+<INPUT TYPE=hidden NAME="obj50">
+<INPUT TYPE=submit VALUE="Generate!" STYLE="font-size:12pt; font-weight:bold;" onClick="return generate();">
+</FORM></TD></TR></TABLE>
+
+<BR><I><FONT SIZE=-1>Graphics by Court Jester<BR>Coding by Mark</FONT></I>
+
+</CENTER>
+</BODY>
+</HTML>
+<DIV STYLE="display:none">

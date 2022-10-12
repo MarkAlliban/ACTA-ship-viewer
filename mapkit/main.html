@@ -1,0 +1,174 @@
+<HTML>
+<HEAD>
+<STYLE TYPE="text/css">
+.dragme {position:absolute; border: 1px; color:#000000; border-collapse:collapse; color:white; font-family:Arial; font-size:8pt;}
+.planettype {font-family:Arial; font-size:5pt;}
+TD	{font-family:Arial; font-size:10pt;}
+</STYLE>
+<SCRIPT LANGUAGE="JavaScript">
+var ie=document.all;
+var nn6=document.getElementById&&!document.all;
+var isdrag=false;
+var x,y;
+var dobj;
+function movemouse(e) {
+	if(isdrag) {
+		if(drg=="xy") {dobj.style.left=nn6 ? tx+e.clientX-x : tx+event.clientX-x;}
+		dobj.style.top=nn6 ? ty+e.clientY-y : ty+event.clientY-y;
+		objnum=dobj.id.substring(6,10);
+		divx=dobj.offsetWidth;
+		imgx=document.images["mapImg"+objnum].offsetWidth;
+		if(divx>imgx)
+			parent.frmMenu.obj[1][objnum]=dobj.offsetLeft+(divx-imgx)/2;
+		else
+			parent.frmMenu.obj[1][objnum]=dobj.offsetLeft;
+		parent.frmMenu.obj[2][objnum]=dobj.offsetTop;
+		return false;
+	}
+}
+function selectmouse(e) {
+	var fobj=nn6 ? e.target : event.srcElement;
+	var topelement=nn6 ? "HTML" : "BODY";
+	while(fobj.tagName!=topelement && fobj.className!="dragme" && fobj.className!="dragmey") {
+		fobj=nn6 ? fobj.parentNode : fobj.parentElement;
+	}
+	if(fobj.className=="dragme" || fobj.className=="dragmey") {
+		if(fobj.className=="dragme") drg="xy"; else drg="y";
+		isdrag=true;
+		dobj=fobj;
+		tx=parseInt(dobj.style.left+0);
+		ty=parseInt(dobj.style.top+0);
+		x=nn6 ? e.clientX : event.clientX;
+		y=nn6 ? e.clientY : event.clientY;
+		document.onmousemove=movemouse;
+		objnum=dobj.id.substring(6,10);
+		frmEdit.editNum.value=objnum;
+		frmEdit.editType.value=parent.frmMenu.obj[0][objnum];
+		frmEdit.editName.value=parent.frmMenu.obj[3][objnum];
+		frmEdit.editSize.value=parent.frmMenu.obj[4][objnum];
+		return false;
+	}
+}
+document.onmousedown=selectmouse;
+document.onmouseup=new Function("isdrag=false");
+
+function editplanet(num,n,nm,sz) {
+	parent.frmMenu.obj[3][num]=nm;
+	parent.frmMenu.obj[4][num]=sz;
+	objj=eval("mapObj"+num);
+	if(n==1) worldtype="Construction Yard";
+	if(n==2) worldtype="Diplomatic Station";
+	if(n==3) worldtype="Military Installation";
+	if(n==4) worldtype="Scrap Yard";
+	if(n==5) worldtype="Space Docks";
+	if(n==6) worldtype="Trade Station";
+	if(n==7) worldtype="Asteroid Belt";
+	if(n==8) worldtype="Planetary Ring";
+	if(n==9) worldtype="Rich Dustcloud";
+	if(n==10) worldtype="Ship Graveyard";
+	if(n==11) worldtype="Gas Giant: Medium-Yield";
+	if(n==12) worldtype="Gas Giant: Low-Yield";
+	if(n==13) worldtype="Gas Giant: High-Yield";
+	if(n==14) worldtype="Hidden Outpost";
+	if(n==15) worldtype="Leisure World";
+	if(n==16) worldtype="Primitive World";
+	if(n==17) worldtype="Industrial World";
+	if(n==18) worldtype="Agrarian World";
+	if(n==19) worldtype="Commerce World";
+	if(n==20) worldtype="Barren World";
+	if(n==21) worldtype="Ice World";
+	if(n==22) worldtype="Molten World";
+	if(n==23) worldtype="Toxic World";
+	if(n==24) worldtype="Temperate Planet";
+	if(n==25) worldtype="Verdant Planet";
+	if(n==26) worldtype="Water Planet";
+	if(n==27) worldtype="Jump Gate";
+	if(n==28) worldtype="Ancient Jump Gate";
+	if(n==29) worldtype="Faulty Jump Gate";
+	if(n==30) worldtype="Mining Outpost";
+	if(n==31) worldtype="Observation Outpost";
+	if(n==32) worldtype="Religious Outpost";
+	if(n==33) worldtype="Scientific Outpost";
+	if(n==34) worldtype="Ice-Rock Comet";
+	if(n==35) worldtype="Mineral-Rich Comet";
+	imagename="mapImg"+num;
+	objj.innerHTML="<IMG SRC='object_"+n+".gif' NAME='"+imagename+"'><BR>"+nm+"<BR><SPAN CLASS='planettype'>("+worldtype+")</SPAN>";
+	parent.frmMain.document.images[imagename].width=sz;
+}
+function delplanet(num) {
+	parent.frmMenu.obj[0][num]="";
+	parent.frmMenu.obj[3][num]="";
+	parent.frmMenu.obj[4][num]="";
+	objj=eval("mapObj"+num);
+	objj.innerHTML="";
+}
+</SCRIPT>
+</HEAD>
+<BODY BGCOLOR=white TEXT=black>
+<DIV ID="mapObj1" CLASS="dragme" ALIGN=center></DIV>
+<DIV ID="mapObj2" CLASS="dragme" ALIGN=center></DIV>
+<DIV ID="mapObj3" CLASS="dragme" ALIGN=center></DIV>
+<DIV ID="mapObj4" CLASS="dragme" ALIGN=center></DIV>
+<DIV ID="mapObj5" CLASS="dragme" ALIGN=center></DIV>
+<DIV ID="mapObj6" CLASS="dragme" ALIGN=center></DIV>
+<DIV ID="mapObj7" CLASS="dragme" ALIGN=center></DIV>
+<DIV ID="mapObj8" CLASS="dragme" ALIGN=center></DIV>
+<DIV ID="mapObj9" CLASS="dragme" ALIGN=center></DIV>
+<DIV ID="mapObj10" CLASS="dragme" ALIGN=center></DIV>
+<DIV ID="mapObj11" CLASS="dragme" ALIGN=center></DIV>
+<DIV ID="mapObj12" CLASS="dragme" ALIGN=center></DIV>
+<DIV ID="mapObj13" CLASS="dragme" ALIGN=center></DIV>
+<DIV ID="mapObj14" CLASS="dragme" ALIGN=center></DIV>
+<DIV ID="mapObj15" CLASS="dragme" ALIGN=center></DIV>
+<DIV ID="mapObj16" CLASS="dragme" ALIGN=center></DIV>
+<DIV ID="mapObj17" CLASS="dragme" ALIGN=center></DIV>
+<DIV ID="mapObj18" CLASS="dragme" ALIGN=center></DIV>
+<DIV ID="mapObj19" CLASS="dragme" ALIGN=center></DIV>
+<DIV ID="mapObj20" CLASS="dragme" ALIGN=center></DIV>
+<DIV ID="mapObj21" CLASS="dragme" ALIGN=center></DIV>
+<DIV ID="mapObj22" CLASS="dragme" ALIGN=center></DIV>
+<DIV ID="mapObj23" CLASS="dragme" ALIGN=center></DIV>
+<DIV ID="mapObj24" CLASS="dragme" ALIGN=center></DIV>
+<DIV ID="mapObj25" CLASS="dragme" ALIGN=center></DIV>
+<DIV ID="mapObj26" CLASS="dragme" ALIGN=center></DIV>
+<DIV ID="mapObj27" CLASS="dragme" ALIGN=center></DIV>
+<DIV ID="mapObj28" CLASS="dragme" ALIGN=center></DIV>
+<DIV ID="mapObj29" CLASS="dragme" ALIGN=center></DIV>
+<DIV ID="mapObj30" CLASS="dragme" ALIGN=center></DIV>
+<DIV ID="mapObj31" CLASS="dragme" ALIGN=center></DIV>
+<DIV ID="mapObj32" CLASS="dragme" ALIGN=center></DIV>
+<DIV ID="mapObj33" CLASS="dragme" ALIGN=center></DIV>
+<DIV ID="mapObj34" CLASS="dragme" ALIGN=center></DIV>
+<DIV ID="mapObj35" CLASS="dragme" ALIGN=center></DIV>
+<DIV ID="mapObj36" CLASS="dragme" ALIGN=center></DIV>
+<DIV ID="mapObj37" CLASS="dragme" ALIGN=center></DIV>
+<DIV ID="mapObj38" CLASS="dragme" ALIGN=center></DIV>
+<DIV ID="mapObj39" CLASS="dragme" ALIGN=center></DIV>
+<DIV ID="mapObj40" CLASS="dragme" ALIGN=center></DIV>
+<DIV ID="mapObj41" CLASS="dragme" ALIGN=center></DIV>
+<DIV ID="mapObj42" CLASS="dragme" ALIGN=center></DIV>
+<DIV ID="mapObj43" CLASS="dragme" ALIGN=center></DIV>
+<DIV ID="mapObj44" CLASS="dragme" ALIGN=center></DIV>
+<DIV ID="mapObj45" CLASS="dragme" ALIGN=center></DIV>
+<DIV ID="mapObj46" CLASS="dragme" ALIGN=center></DIV>
+<DIV ID="mapObj47" CLASS="dragme" ALIGN=center></DIV>
+<DIV ID="mapObj48" CLASS="dragme" ALIGN=center></DIV>
+<DIV ID="mapObj49" CLASS="dragme" ALIGN=center></DIV>
+<DIV ID="mapObj50" CLASS="dragme" ALIGN=center></DIV>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 BORDER=0><FORM NAME="frmEdit">
+<TR><TD HEIGHT=97 WIDTH=330 BGCOLOR=black></TD><TD WIDTH=170 ALIGN=center BGCOLOR="#ffffc0">
+<INPUT TYPE=hidden NAME="editNum">
+<INPUT TYPE=hidden NAME="editType">
+<B><U>Edit Selected</U></B><BR>
+Name: <INPUT TYPE=text NAME="editName" SIZE=10>&nbsp;<BR>
+Size: <INPUT TYPE=text NAME="editSize" SIZE=10>&nbsp;<BR>
+<INPUT TYPE=button VALUE="Update" onClick="editplanet(frmEdit.editNum.value,frmEdit.editType.value,frmEdit.editName.value,frmEdit.editSize.value);">&nbsp;
+<INPUT TYPE=button VALUE="Delete" onClick="delplanet(frmEdit.editNum.value);" STYLE="background-color:#ff8080">&nbsp;
+</TD></TR></FORM>
+<TR><TD COLSPAN=2><IMG SRC="background_1.jpg" NAME="mapBG" ID="mapBG" WIDTH=500 HEIGHT=353></TD></TR>
+</TABLE>
+
+</BODY>
+</HTML>
+<DIV STYLE="display:none">
