@@ -4,12 +4,12 @@
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<meta name="description" content="A ship stat sheet resource for Mongoose Publishing's ACTA table-top game" />
-	<meta name="keywords" content="" />
+	<meta name="description" content="Burger's Ship Viewer is a ship stat sheet resource for Mongoose Publishing's ACTA table-top game" />
+	<meta name="keywords" content="burger ship, ship viewer, burgership" />
 	<meta name="theme-color" content="#C3BC90" />
 	<meta name="msapplication-navbutton-color" content="#C3BC90" />
 	<meta name="image" property="og:image" content="https://ibisfightclub.tk/icons/favicon-512x512.png" />
-	<title>ACTA Ship Viewer</title>
+	<title>Burger's Ship Viewer for ACTA</title>
 	<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
 	<link rel="apple-touch-icon" sizes="180x180" href="/icons/favicon.png">
 	<link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">

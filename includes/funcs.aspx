@@ -6,13 +6,13 @@ SqlConnection conn = new SqlConnection("Server=www.great1.com;User Id=sa;Passwor
 List<string> WeaponArcs=new List<string>();
 
 protected void Page_Load(Object s,EventArgs e) {
-	// If this is the production server, make sure we are connected to HTTPS
-	if(Request.Url.Scheme=="http") {
-		Response.RedirectPermanent("https://"+Request.Url.Host+Request.Url.AbsolutePath);
-	}
+	// Remove www. prefix if present
 	if(Request.Url.Host=="www.ibisfightclub.tk") Response.RedirectPermanent("https://ibisfightclub.tk"+Request.Url.AbsolutePath);
 	if(Request.Url.Host=="www.ibisfightclub.ml") Response.RedirectPermanent("https://ibisfightclub.ml"+Request.Url.AbsolutePath);
-	if(Request.RawUrl=="/index.aspx") Response.RedirectPermanent("https://"+Request.Url.Host);
+	// If this is the production server, make sure we are connected to HTTPS
+	if(Request.Url.Scheme=="http" && Request.Url.Host!="127.0.0.1") Response.RedirectPermanent("https://"+Request.Url.Host+Request.Url.AbsolutePath);
+	// Remove default document if present
+	if(Request.RawUrl=="/index.aspx" && Request.Url.Host!="127.0.0.1") Response.RedirectPermanent("https://"+Request.Url.Host);
 
 	// Open a database connection
 	try {
