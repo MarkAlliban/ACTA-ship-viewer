@@ -2,8 +2,7 @@
 <!--#include virtual="includes/header.aspx"-->
 <div class='container' style="text-align:center">
 	<div style='max-width:450px; background:linear-gradient(#C3BC90,#EDE8D3); text-align:center; margin:0 auto 10px'>
-		<h1 style='text-align:center; color:#000; padding-bottom:0'>B5 / ACTA</h1>
-		<h1 style='text-align:center; color:#000; padding-top:0'>Ship Viewer</h1>
+		<h1 style='text-align:center; color:#000'>Burger's Ship Viewer for ACTA</h1>
 	</div>
 	<div class='index-cards' style='align-items:center'>
 		<div class='index-card' style='width:80%; flex-basis:initial; flex-grow:initial;'>
