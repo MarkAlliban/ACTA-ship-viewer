@@ -1,0 +1,444 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans|Roboto+Slab');
+@font-face {
+	font-family:'Babylon5';
+	font-weight:700;
+	font-style:normal;
+	font-display:swap;
+	src:url('Serpentine-Bold-Bold.woff') format('woff');
+}
+:root {
+	--header-height:3rem;
+	--footer-height:2.5rem;
+	--button-color-background:#8af;
+	--button-color-hover:#acf;
+}
+* {box-sizing:border-box}
+html {
+	height:100%;
+}
+body {
+	height:100%;
+	font-family:'Open Sans',Arial;
+	font-size:1rem;
+	color:#222;
+	margin:0;
+	margin-left:calc(100vw - 100%);
+}
+#root {height:100%}
+h1 {
+	font-family:'Babylon5',Arial;
+	font-size:2.5rem;
+	padding:0.5rem 0;
+	margin:0;
+	text-align:center;
+}
+h2 {
+	font-family:'Roboto Slab',Arial;
+	font-size:1.5rem;
+	margin:0;
+	text-align:center;
+}
+h3 {
+	font-family:'Babylon5',Arial;
+	font-size:1.5rem;
+	padding:0.25rem 0;
+	margin:0;
+	text-align:center;
+}
+p {margin:0}
+a {
+	color:#00f;
+	text-decoration:none;
+	transition:color 0.2s ease-in-out;
+}
+a:hover {color:#f00}
+.text-red {color:#f00}
+.text-muted {color:#888}
+button {
+	cursor:pointer;
+	background-color:var(--button-color-background);
+	padding:2px 10px;
+	border:none;
+	border-radius:5px;
+	font-size:1rem;
+	transition:background-color 0.2s ease-in-out;
+}
+button:hover {background-color:var(--button-color-hover)}
+select {
+	border:0;
+	width:100%;
+	padding:2px 5px;
+}
+.container {width:100%}
+header {
+	position:fixed;
+	top:0;
+	left:50%;
+	width:min(90%,640px);
+	height:var(--header-height);
+	margin-left:calc((100vw - 100%)/2);
+	transform:translateX(-50%);
+	border-bottom-left-radius:15px;
+	border-bottom-right-radius:15px;
+	box-shadow:0 0 10px #000;
+	z-index:20;
+}
+.ship-viewer-menu {
+	position:relative;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	height:var(--header-height);
+	background:linear-gradient(#C3BC90,#EDE8D3);
+	border-bottom-left-radius:15px;
+	border-bottom-right-radius:15px;
+	z-index:19;
+}
+.ship-viewer-header {
+	color:#000;
+	text-align:center;
+	padding:0 20px;
+	font-size:1.3rem;
+}
+.fleet-add-menu {
+	position:absolute;
+	top:var(--header-height);
+	left:50%;
+	width:min(80%,300px);
+	z-index:18;
+	overflow:hidden;
+	padding:0 10px 10px 10px;
+	transform:translate(-50%,calc(-100% - var(--header-height)));
+	transition:transform 0.3s ease-in-out;
+}
+.fleet-add-menu.active {transform:translate(-50%,0)}
+.fleet-add-menu > div {
+	background:#EDE8D3;
+	padding:0.5rem 0.5rem 0.8rem;
+	box-shadow:0 0 10px #000;
+	border-bottom-left-radius:15px;
+	border-bottom-right-radius:15px;
+	text-align:center;
+}
+.ship-header-spacer {height:var(--header-height)}
+.ship-footer-spacer {height:var(--footer-height)}
+footer {
+	position:fixed;
+	display:flex;
+	flex-direction:column;
+	justify-content:center;
+	bottom:0;
+	left:50%;
+	margin-left:calc((100vw - 100%)/2);
+	width:min(90%,640px);
+	height:var(--footer-height);
+	background:linear-gradient(#EDE8D3,#C3BC90);
+	transform:translateX(-50%);
+	border-top-left-radius:100px;
+	border-top-right-radius:100px;
+	font-size:0.8rem;
+	box-shadow:0 0 10px #000;
+	z-index:100;
+}
+footer>* {
+	position:relative;
+	align-self:center;
+}
+
+/* FRONT MENU */
+.index-cards {
+	display:flex;
+	justify-content:space-around;
+	flex-direction:column;
+	color:#eee;
+}
+.index-cards a {
+	position:relative;
+	text-decoration:none;
+	color:#ff0;
+	transition:color 0.2s ease-in-out;
+}
+.index-cards a::before {
+	content:'';
+	position:absolute;
+	height:2px;
+	width:100%;
+	bottom:0;
+	background-color:#ff0;
+	transform:scaleX(0);
+	transition:transform 0.2s linear;
+}
+.index-cards a:hover {color:#ff0}
+.index-cards a:hover::before {transform:scaleX(1)}
+.index-card {
+	margin:0 10px 20px 10px;
+	backdrop-filter:blur(3px) brightness(0.7);
+	border-radius:20px;
+	border:2px solid rgba(0,0,0,0.3);
+	flex-basis:0;
+	flex-grow:1;
+}
+.index-card img {
+	margin-top:7px;
+	border-radius:10px;
+	width:250px;
+	height:40px;
+	object-fit:cover;
+}
+
+
+/* SHIP LIST */
+.ship-list {
+	margin:20px auto;
+	box-shadow:0 0 15px 4px rgba(32,32,64,0.7);
+}
+.shipindex-levels {
+	display:flex;
+	flex-direction:column;
+}
+.shipindex-levels>div {
+	flex:1 0 0;
+	text-align:center;
+	font-size:0.85rem;
+	padding:0;
+}
+.shipindex-levels>div:nth-child(2n) {background:#ddd}
+.shipindex-levels>div:nth-child(2n+1) {background:#eee}
+.shipindex-levels.ancients>div:nth-child(2n) {background:#fc8}
+.shipindex-levels.levelnames {display:none}
+.ship-link-1, .ship-link-2 {color:#00f}
+.ship-link-3 {color:#b90}
+.ship-link-4 {color:#090}
+
+/* SHIP SHEET */
+.fleet-container {
+	display:flex;
+	max-width:640px;
+	flex-wrap:wrap;
+	margin:auto;
+}
+.ship-main-table, .fighter-main-table {
+	position:relative;
+	width:95%;
+	page-break-inside:avoid;
+	border:1px solid black;
+	margin:7px auto;
+	border-collapse:collapse;
+	font-family:'Babylon5',Arial;
+	font-size:7pt;
+	color:#000;
+}
+.nomobile {display:none !important}
+.ship-col-1 {min-width:50%}
+.ship-col-2 {width:40px}
+.ship-col-3 {width:20px}
+.ship-col-25 {width:25%}
+.ship-col-12 {width:12%}
+.ship-close {
+	position:absolute;
+	top:2px;
+	left:2px;
+	width:17px;
+	height:17px;
+	border-radius:50%;
+	font-family:Arial;
+	color:#f00;
+	cursor:pointer;
+	z-index:1;
+}
+.ship-close:before {
+	content:'';
+	position:absolute;
+	top:1px;
+	left:1px;
+	color:blue;
+	background-color:#fff;
+	width:calc(100% - 2px);
+	height:calc(100% - 2px);
+	z-index:-1;
+	border-radius:50px;
+}
+.fighter-link {
+	text-decoration:underline;
+	text-decoration-color:#f00;
+	cursor:pointer;
+}
+.aux-craft-container {
+	width:95%;
+	display:flex;
+	flex-wrap:wrap;
+	margin:0 auto;
+}
+.aux-craft-table {
+	width:300px;
+	border:1px solid black;
+	margin:7px auto;
+	border-collapse:collapse;
+	font-family:'Babylon5',Arial;
+	font-size:7pt;
+	color:#000;
+}
+.ship-main-table > tbody > tr > td, .fighter-main-table > tbody > tr > td {border:1px solid #000}
+.ship-main-table .heading, .fighter-main-table .heading {
+	font-size:12pt;
+	text-align:center;
+}
+.ship-main-table .subheading, .fighter-main-table .subheading {
+	text-align:center;
+	height:12px;
+}
+.ship-main-table .grey, .fighter-main-table .grey {background:#ddd}
+.ship-info-table {
+	width:100%;
+	border-collapse:collapse;
+	border:0;
+	font-size:8pt;
+	vertical-align:top;
+}
+.ship-info-table td:first-child {
+	vertical-align:top;
+	width:33%;
+}
+.ship-weapons-table {
+	width:100%;
+	border-collapse:collapse;
+	margin-top:10px;
+}
+.ship-weapons-table thead {background:#ddd}
+.ship-weapons-table th:first-child {text-align:left}
+.ship-weapons-table .arc {
+	text-align:center !important;
+	font-size:10pt;
+}
+.ship-weapons-table td {text-align:center}
+.ship-weapons-table td:first-child {text-align:left}
+.ship-damage-boxes {
+	display:grid;
+	grid-template-columns:repeat(10,1fr);
+	margin-bottom:5px;
+}
+.ship-dmg {
+	height:8px;
+	border:1px solid #000;
+	border-top:0;
+	border-left:0;
+	box-sizing:border-box;
+	border-collapse:collapse;
+	background:#fff;
+}
+.ship-name {
+	font-family:Arial;
+	font-size:7pt;
+	margin:auto;
+}
+td:has(.ship-name), td:has(.ship-cq) {
+	position:relative;
+	height:21px;
+	padding:0;
+}
+.ship-name, .ship-cq {
+	border:0;
+	width:100%;
+	margin:0;
+	padding:0;
+	text-align:center;
+}
+.ship-name:focus, .ship-cq:focus {outline:none}
+.ship-name:focus~.ship-name-underline, .ship-cq:focus~.ship-name-underline {height:2px}
+.ship-name-underline {
+	content:'';
+	position:absolute;
+	height:1px;
+	width:90%;
+	left:5%;
+	bottom:1px;
+	background-color:#f00;
+}
+
+.fighter-swappable {cursor:pointer}
+.fighter-swappable::after {
+	content:'';
+	display:inline-block;
+	width:0;
+	height:0;
+	border:7px solid red;
+	border-bottom:none;
+	border-left:7px solid transparent;
+	border-right:7px solid transparent;
+	margin-left:6px;
+
+}
+.fighter-select {
+	background:#ffa;
+	margin:0 20px;
+	display:none;
+}
+.fighter-select.active {display:block}
+.fighter-select-row {
+	display:flex;
+	justify-content:space-between;
+	align-items:center;
+	padding:1px 2px;
+
+}
+.fighter-select-box {
+	width:50px;
+	font-family:'Babylon5',Arial;
+	font-size:8pt;
+}
+.fighters-warning {color:#f00}
+.missile-swapicon {color:#f00}
+
+/* OLD STYLE */
+.online-main-table {
+	width:640px;
+	border:2px solid black;
+	margin:7px auto;
+	border-spacing:2px;
+	padding:5px;
+	color:#000;
+	font-family:Arial;
+}
+.online-main-table td {vertical-align:top}
+.online-weapon-table:nth-child(2n) {background:#ddd}
+.online-weapon-table td:nth-child(2), .online-weapon-table td:nth-child(3), .online-weapon-table td:nth-child(4) {text-align:center}
+
+@media (min-width:660px) {
+	:root {--header-height:2.5rem}
+	.display-mobile {display:none}
+	.nomobile {display:revert !important}
+	.ship-main-table {width:640px}
+	.fighter-main-table {width:310px}
+	.aux-craft-container {width:640px}
+	.ship-viewer-header {font-size:2rem}
+}
+@media (min-width:780px) {
+	.container {
+		width:clamp(760px,80%,1200px);
+		margin:0 auto;
+	}
+	header {
+		border-bottom-left-radius:50px;
+		border-bottom-right-radius:50px;
+	}
+	.ship-viewer-menu {
+		border-bottom-left-radius:50px;
+		border-bottom-right-radius:50px;
+	}
+	.index-cards {flex-direction:row}
+	.ship-list {
+		margin:30px auto;
+		box-shadow:0 0 15px 4px rgba(32,32,64,0.7);
+	}
+	.shipindex-levels {flex-direction:row}
+	.shipindex-levels>div {padding:0.2rem 0}
+	.shipindex-levels.levelnames {display:flex}
+	.shipindex-levelsinline {display:none}
+}
+@media print {
+	.noprint, .fighter-swappable::after, .fleet-add-box, .ship-name::after, .ship-cq::after, .ship-close {display:none !important}
+	.display-mobile {display:none}
+	.nomobile {display:revert !important}
+	.fighter-link {text-decoration:none}
+	.fighter-main-table {width:310px}
+}

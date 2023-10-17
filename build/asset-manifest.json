@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/static/css/main.0935cba5.css",
+    "main.js": "/static/js/main.fd5c15ce.js",
+    "static/media/space.jpg": "/static/media/space.e8e95c9ef3874b34d079.jpg",
+    "static/media/kosh.jpg": "/static/media/kosh.b5d9bcb5aafd6125dfdc.jpg",
+    "static/media/Serpentine-Bold-Bold.woff": "/static/media/Serpentine-Bold-Bold.c2f2567993982247d935.woff",
+    "index.html": "/index.html",
+    "main.0935cba5.css.map": "/static/css/main.0935cba5.css.map",
+    "main.fd5c15ce.js.map": "/static/js/main.fd5c15ce.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0935cba5.css",
+    "static/js/main.fd5c15ce.js"
+  ]
+}
